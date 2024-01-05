@@ -21,8 +21,11 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (number < 0) {
+    return false;
+  }
+  return true;
 }
 
 /**
@@ -38,8 +41,15 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let maxNumber = a;
+  if (b > maxNumber) {
+    maxNumber = b;
+  }
+  if (c > maxNumber) {
+    maxNumber = c;
+  }
+  return maxNumber;
 }
 
 /**
@@ -60,8 +70,12 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  return (
+    queen.x === king.x ||
+    queen.y === king.y ||
+    Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)
+  );
 }
 
 /**
@@ -82,8 +96,11 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || b + c <= a || a + c <= b) {
+    return false;
+  }
+  return a === b || b === c || a === c;
 }
 
 /**
@@ -119,8 +136,63 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let result = '';
+  let currentWord = '';
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    const char = numberStr[i];
+
+    switch (char) {
+      case '0':
+        currentWord = 'zero';
+        break;
+      case '1':
+        currentWord = 'one';
+        break;
+      case '2':
+        currentWord = 'two';
+        break;
+      case '3':
+        currentWord = 'three';
+        break;
+      case '4':
+        currentWord = 'four';
+        break;
+      case '5':
+        currentWord = 'five';
+        break;
+      case '6':
+        currentWord = 'six';
+        break;
+      case '7':
+        currentWord = 'seven';
+        break;
+      case '8':
+        currentWord = 'eight';
+        break;
+      case '9':
+        currentWord = 'nine';
+        break;
+      case '.':
+      case ',':
+        currentWord = 'point';
+        break;
+      case '-':
+        currentWord = 'minus';
+        break;
+      default:
+        // If the character is not a digit, add the current word to the result
+        result += currentWord !== '' ? `${currentWord} ` : '';
+        currentWord = '';
+        // Add the current non-digit character to the result
+        result += char;
+    }
+  }
+
+  // Add the last word if any, and remove trailing space
+  result += currentWord !== '' ? `${currentWord} ` : '';
+  return result.trim();
 }
 
 /**
