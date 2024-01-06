@@ -117,8 +117,44 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let result = '';
+  const numToX = Math.floor(num / 10);
+  for (let i = 0; i < numToX; i += 1) {
+    result += 'X';
+  }
+  switch (num % 10) {
+    case 1:
+      result += 'I';
+      break;
+    case 2:
+      result += 'II';
+      break;
+    case 3:
+      result += 'III';
+      break;
+    case 4:
+      result += 'IV';
+      break;
+    case 5:
+      result += 'V';
+      break;
+    case 6:
+      result += 'VI';
+      break;
+    case 7:
+      result += 'VII';
+      break;
+    case 8:
+      result += 'VIII';
+      break;
+    case 9:
+      result += 'IX';
+      break;
+    default:
+      result += '';
+  }
+  return result;
 }
 
 /**
@@ -138,61 +174,54 @@ function convertToRomanNumerals(/* num */) {
  */
 function convertNumberToString(numberStr) {
   let result = '';
-  let currentWord = '';
 
   for (let i = 0; i < numberStr.length; i += 1) {
-    const char = numberStr[i];
-
-    switch (char) {
+    switch (numberStr[i]) {
       case '0':
-        currentWord = 'zero';
+        result += 'zero';
         break;
       case '1':
-        currentWord = 'one';
+        result += 'one';
         break;
       case '2':
-        currentWord = 'two';
+        result += 'two';
         break;
       case '3':
-        currentWord = 'three';
+        result += 'three';
         break;
       case '4':
-        currentWord = 'four';
+        result += 'four';
         break;
       case '5':
-        currentWord = 'five';
+        result += 'five';
         break;
       case '6':
-        currentWord = 'six';
+        result += 'six';
         break;
       case '7':
-        currentWord = 'seven';
+        result += 'seven';
         break;
       case '8':
-        currentWord = 'eight';
+        result += 'eight';
         break;
       case '9':
-        currentWord = 'nine';
+        result += 'nine';
         break;
       case '.':
       case ',':
-        currentWord = 'point';
+        result += 'point';
         break;
       case '-':
-        currentWord = 'minus';
+        result += 'minus';
         break;
       default:
-        // If the character is not a digit, add the current word to the result
-        result += currentWord !== '' ? `${currentWord} ` : '';
-        currentWord = '';
-        // Add the current non-digit character to the result
-        result += char;
+        result += '';
+    }
+    if (i !== numberStr.length - 1) {
+      result += ' ';
     }
   }
-
-  // Add the last word if any, and remove trailing space
-  result += currentWord !== '' ? `${currentWord} ` : '';
-  return result.trim();
+  return result;
 }
 
 /**
